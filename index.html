@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="FlipBook Studio: crea y administra tus publicaciones digitales.">
+  <title>FlipBook Studio</title>
+  <link rel="stylesheet" href="css/styles.css?v=1.4.0">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="FlipBook Studio inicio">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-name">FlipBook <b>Studio</b><small>PUBLICACIÓN DIGITAL</small></span>
+      </a>
+      <div class="workspace-label">ESPACIO DE TRABAJO</div>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">▦</span> Panel principal</button>
+        <button class="nav-item" data-view="library"><span class="nav-icon">▤</span> Mi biblioteca</button>
+        <button class="nav-item" data-view="projects"><span class="nav-icon">▧</span> Proyectos</button>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label">HERRAMIENTAS</div>
+      <nav class="main-nav" aria-label="Herramientas">
+        <button class="nav-item" data-view="import"><span class="nav-icon">＋</span> Importar PDF</button>
+        <button class="nav-item" data-view="exports"><span class="nav-icon">⇧</span> Exportaciones</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="local-status"><span class="status-dot"></span><span><b>Modo local</b><small>Documentos guardados en este equipo</small></span></div>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span> Configuración</button>
+        <div class="sidebar-version">FLIPBOOK STUDIO · VERSIÓN 1.3.2</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">☰</button>
+        <div class="breadcrumb">Espacio de trabajo <span>/</span> <b id="breadcrumbCurrent">Panel principal</b></div>
+        <div class="topbar-actions">
+          <span class="local-pill"><span class="status-dot"></span> Almacenamiento local</span>
+          <button class="avatar" title="FlipBook Studio">FS</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-row">
+          <div><div class="eyebrow">TU ESPACIO CREATIVO</div><h1>Panel principal</h1><p class="subtitle">Organiza tus documentos y conviértelos en experiencias de lectura digital.</p></div>
+          <button class="primary-btn" id="newProjectBtn"><span>＋</span> Nuevo proyecto</button>
+        </div>
+        <div class="hero-card">
+          <div class="hero-copy">
+            <div class="hero-kicker">BIENVENIDO A FLIPBOOK STUDIO</div>
+            <h2>Tus publicaciones,<br><em>una nueva forma de leerse.</em></h2>
+            <p>Importa un PDF, prepara tu publicación y crea una revista digital que podrás compartir en tu web.</p>
+            <button class="hero-btn" id="heroImportBtn">Importar mi primer PDF <span>→</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="book-shadow"></div><div class="book-page page-back"></div><div class="book-page page-front"><div class="cover-band"></div><div class="cover-lines"><i></i><i></i><i></i></div><div class="cover-label">TU PRÓXIMA<br>PUBLICACIÓN</div><div class="cover-number">01</div></div><div class="floating-chip chip-one">PDF → FLIPBOOK</div><div class="floating-chip chip-two">HTML5 · ZIP</div></div>
+        </div>
+        <div class="section-heading"><div><h2>Resumen de tu biblioteca</h2><p>El estado de tus publicaciones en este equipo.</p></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon blue">▤</div><div><span>Documentos PDF</span><strong id="statPublications">0</strong><small>Guardados localmente</small></div></article>
+          <article class="stat-card"><div class="stat-icon violet">▧</div><div><span>Proyectos</span><strong id="statProjects">0</strong><small>En preparación</small></div></article>
+          <article class="stat-card"><div class="stat-icon green">⇧</div><div><span>Exportaciones</span><strong id="statExports">0</strong><small>Paquetes generados</small></div></article>
+        </div>
+        <div class="section-heading recent-heading"><div><h2>Actividad reciente</h2><p>Tus documentos importados aparecerán aquí.</p></div><button class="text-btn" data-goto="projects">Ver proyectos <span>→</span></button></div>
+        <div class="empty-state" id="recentEmpty"><div class="empty-illustration"><span>▤</span><i>＋</i></div><h3>Aún no tienes proyectos</h3><p>Comienza importando un PDF. Aquí podrás continuar trabajando en tus publicaciones.</p><button class="secondary-btn" id="emptyImportBtn">Importar documento</button></div>
+        <div class="project-list" id="recentList"></div>
+      </section>
+
+      <section class="view" id="view-viewer">
+        <div class="viewer-heading">
+          <div><div class="eyebrow">VISOR DE PUBLICACIÓN · FASE 3</div><h1 id="viewerTitle">Leyendo publicación</h1><p class="subtitle" id="viewerSubtitle">Tu documento se está preparando para la lectura.</p></div>
+          <button class="secondary-btn" id="closeViewerBtn">← Volver a proyectos</button>
+        </div>
+        <div class="reader-shell">
+          <div class="reader-toolbar">
+            <div class="reader-document"><span class="reader-file-icon">PDF</span><div><b id="readerDocumentTitle">Documento PDF</b><small id="readerDocumentPages">Preparando páginas…</small></div></div>
+            <div class="reader-actions"><button class="reader-control" id="zoomOutBtn" title="Alejar">−</button><span id="zoomLabel">100%</span><button class="reader-control" id="zoomInBtn" title="Acercar">＋</button><button class="reader-control" id="fullscreenBtn" title="Pantalla completa">⛶</button></div>
+          </div>
+          <div class="flipbook-stage" id="flipbookStage">
+            <div class="reader-loading" id="readerLoading"><div class="spinner"></div><b>Preparando tu revista…</b><small id="readerProgress">Cargando documento PDF.</small></div>
+            <div class="flipbook-mount" id="flipbookMount"></div>
+          </div>
+          <div class="reader-footer">
+            <button class="reader-nav-btn" id="previousPageBtn" disabled>← Anterior</button>
+            <div class="reader-page-status"><span id="currentPageLabel">0</span><span class="reader-page-separator">/</span><span id="totalPagesLabel">0</span><small>PÁGINA</small></div>
+            <button class="reader-nav-btn" id="nextPageBtn" disabled>Siguiente →</button>
+          </div>
+          <div class="reader-hint">También puedes pasar las páginas arrastrando una esquina o usando las flechas del teclado.</div>
+        </div>
+      </section>
+
+      <section class="view" id="view-library">
+        <div class="page-heading"><div><div class="eyebrow">COLECCIÓN PERSONAL</div><h1>Mi biblioteca</h1><p class="subtitle">Tus documentos y publicaciones digitales, organizados en un solo lugar.</p></div></div>
+        <div class="placeholder-panel"><div class="placeholder-icon">▤</div><h2>Tu biblioteca está lista para crecer</h2><p>En esta fase ya puedes importar y conservar tus documentos PDF. La organización avanzada llegará en una siguiente etapa.</p><button class="primary-btn" data-goto="import">Importar PDF</button></div>
+      </section>
+
+      <section class="view" id="view-projects">
+        <div class="page-heading"><div><div class="eyebrow">ÁREA DE TRABAJO</div><h1>Proyectos</h1><p class="subtitle">Administra los documentos PDF que estás preparando.</p></div><button class="primary-btn" data-goto="import">＋ Importar PDF</button></div>
+        <div class="project-list full-list" id="allProjects"></div>
+        <div class="empty-state" id="projectsEmpty"><div class="empty-illustration"><span>▧</span><i>＋</i></div><h3>No hay proyectos todavía</h3><p>Cuando importes tu primer PDF, aparecerá en esta sección.</p><button class="secondary-btn" data-goto="import">Importar documento</button></div>
+      </section>
+
+      <section class="view" id="view-import">
+        <div class="page-heading"><div><div class="eyebrow">FASE 2 · PROCESAMIENTO PDF</div><h1>Importar PDF</h1><p class="subtitle">Carga un documento, revisa sus páginas y guárdalo como proyecto local.</p></div></div>
+        <div class="import-card">
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">↑</div><h2>Arrastra tu archivo PDF aquí</h2><p>o selecciónalo desde tu computadora</p>
+            <label class="primary-btn file-label">Seleccionar PDF<input type="file" id="pdfInput" accept="application/pdf,.pdf"></label>
+            <small>El documento se procesa en tu navegador y se guarda en el almacenamiento local de este equipo. No se envía a un servidor.</small>
+          </div>
+          <div class="processing" id="processing" hidden><div class="spinner"></div><div><b>Procesando documento…</b><small id="processingMessage">Leyendo estructura del PDF.</small></div></div>
+          <div class="import-error" id="importError" hidden></div>
+          <div class="pdf-result" id="pdfResult" hidden>
+            <div class="pdf-result-head"><div><span class="eyebrow">DOCUMENTO PROCESADO</span><h2 id="resultTitle">Documento PDF</h2><p id="resultMeta"></p></div><span class="success-pill">✓ Guardado localmente</span></div>
+            <div class="preview-layout">
+              <div class="page-preview"><canvas id="firstPageCanvas"></canvas><span>VISTA PREVIA · PÁGINA 1</span></div>
+              <div class="document-details">
+                <div class="detail-item"><small>Páginas detectadas</small><b id="detailPages">—</b></div>
+                <div class="detail-item"><small>Tamaño del archivo</small><b id="detailSize">—</b></div>
+                <div class="detail-item"><small>Formato</small><b>PDF</b></div>
+                <div class="detail-item"><small>Estado</small><b>Proyecto guardado</b></div>
+                <p>El documento original se conserva en el almacenamiento local para las siguientes etapas de edición.</p>
+                <button class="secondary-btn" id="importAnotherBtn">Importar otro PDF</button>
+              </div>
+            </div>
+          </div>
+          <div class="import-note"><span>ⓘ</span><p><b>Privacidad local.</b> El PDF original y sus datos se guardan en IndexedDB de este navegador. No borres los datos del sitio ni cambies de perfil sin realizar una copia de seguridad cuando esa función esté disponible.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-exports">
+        <div class="page-heading"><div><div class="eyebrow">PUBLICACIÓN · FASE 4</div><h1>Publicar y exportar</h1><p class="subtitle">Convierte tus revistas en publicaciones web y paquetes offline independientes.</p></div></div>
+        <div class="export-workspace">
+          <div class="export-config-card">
+            <div class="export-card-heading"><div><span class="export-icon">⇧</span><div><h2>Preparar publicación</h2><p>Selecciona una revista y configura su presentación.</p></div></div></div>
+            <label class="export-field-label" for="exportProjectSelect">Revista que deseas publicar</label>
+            <select id="exportProjectSelect" class="export-select"><option value="">Cargando proyectos…</option></select>
+            <div class="export-option-grid">
+              <div class="export-option">
+                <label class="export-field-label" for="exportBranding">Identidad de la publicación</label>
+                <select id="exportBranding" class="export-select">
+                  <option value="branded">Con marca FlipBook Studio</option>
+                  <option value="clean">Sin marca (publicación limpia)</option>
+                </select>
+                <small>La marca es opcional y se puede elegir en cada exportación.</small>
+              </div>
+              <div class="export-option">
+                <label class="export-field-label" for="exportImageQuality">Calidad de imágenes</label>
+                <select id="exportImageQuality" class="export-select">
+                  <option value="0.88">Alta · recomendada</option>
+                  <option value="0.94">Máxima · archivos más grandes</option>
+                  <option value="0.78">Ligera · carga más rápida</option>
+                </select>
+                <small>Las páginas se optimizan como imágenes WebP.</small>
+              </div>
+            </div>
+            <div class="export-actions-grid">
+              <button class="primary-btn export-action-btn" id="exportWebBtn">🌐 Exportar revista web (ZIP)</button>
+              <button class="secondary-btn export-action-btn" id="exportOfflineBtn">💻 Exportar revista offline (ZIP)</button>
+            </div>
+            <div class="export-progress" id="exportProgress" hidden>
+              <div class="export-progress-head"><b id="exportProgressTitle">Preparando publicación…</b><span id="exportProgressPercent">0%</span></div>
+              <div class="export-progress-track"><span id="exportProgressBar"></span></div>
+              <small id="exportProgressMessage">Iniciando…</small>
+            </div>
+            <div class="export-result" id="exportResult" hidden>
+              <b>✓ Paquete generado correctamente</b>
+              <p id="exportResultMessage"></p>
+            </div>
+          </div>
+          <div class="export-help-card">
+            <h2>Insertar en una página web</h2>
+            <p>Después de subir y descomprimir el ZIP en tu alojamiento, pega la dirección pública de la revista.</p>
+            <label class="export-field-label" for="exportPublicUrl">Dirección pública de la revista</label>
+            <input id="exportPublicUrl" class="export-text-input" type="url" placeholder="https://tudominio.com/revistas/mi-revista/">
+            <button class="secondary-btn" id="generateEmbedBtn">Generar código de inserción</button>
+            <label class="export-field-label" for="exportEmbedCode">Código iframe para WordPress, Elementor o Google Sites</label>
+            <textarea id="exportEmbedCode" class="export-code-output" rows="5" readonly placeholder="Aquí aparecerá el código para insertar tu revista."></textarea>
+            <button class="text-btn" id="copyEmbedBtn">Copiar código</button>
+            <div class="export-note"><b>Importante:</b> el iframe necesita que primero publiques la carpeta de la revista en un servidor web. El ZIP offline también puede abrirse localmente con doble clic en index.html.</div>
+          </div>
+        </div>
+        <div class="export-history-card">
+          <div class="section-heading"><div><h2>Exportaciones recientes</h2><p>Historial de paquetes generados en este equipo.</p></div></div>
+          <div id="exportHistoryList" class="export-history-list"><p class="muted">Todavía no has generado exportaciones.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-heading"><div><div class="eyebrow">PREFERENCIAS</div><h1>Configuración</h1><p class="subtitle">Preferencias generales y administración de tus datos.</p></div></div>
+        <div class="settings-card"><div><h3>Almacenamiento del navegador</h3><p>Los proyectos y PDF originales de esta versión se guardan en IndexedDB de este navegador y perfil de usuario.</p></div><span class="settings-badge">LOCAL</span></div>
+        <div class="settings-card"><div><h3>Respaldo de datos</h3><p>La exportación y restauración de copias de seguridad se incorporará en una siguiente fase. Mientras tanto, conserva los PDF originales en tu computadora.</p></div><span class="coming-label">PLANIFICADO</span></div>
+        <div class="settings-card danger-setting"><div><h3>Restablecer datos de prueba</h3><p>Elimina todos los proyectos y documentos PDF guardados en esta instalación.</p></div><button class="danger-btn" id="clearDataBtn">Borrar proyectos</button></div>
+      </section>
+      <footer class="app-footer"><span>FlipBook Studio · 1.3.2</span><span>Aplicación local · Tus documentos permanecen en tu equipo</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- PDF.js se carga desde CDN en esta versión. La descarga local de la biblioteca se planificará para uso 100 % sin conexión. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>\n  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="js/db.js?v=1.4.0"></script>
+  <script src="js/app.js?v=1.4.0"></script>
+</body>
+</html>
